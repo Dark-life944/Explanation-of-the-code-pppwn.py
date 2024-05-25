@@ -44,31 +44,35 @@
 +---------------------------------------+
         |
         v
-+--------------------+        +--------------------+
-| LcpEchoHandler     |        |      Exploit       |     # Explanation 4
-|--------------------|        |--------------------|
-| __init__           |        | __init__           |
-| handler            |        | kdlsym             |
-|                    |        | lcp_negotiation    |
-+--------------------+        | ipcp_negotiation   |
-        |                     | ppp_negotation     |
-        v                     | build_fake_ifnet   |
-  Uses AsyncSniffer           | build_overflow_lle |
-                              | build_fake_lle     |
-                              | build_first_rop    |
-                              | build_second_rop   |
-                              | execute            |
-                              | send_padi          |
-                              | send_padr          |
-                              | send_lcp           |      # Explanation 5
-                              | send_ipcp          |
-                              | recv_lcp           |
-                              | recv_ipcp          |
-                              | ppp_auth           |
-                              | do_exploit         |
-                              +--------------------+
-        |                     |                      |
-        v                     v                      v
++-----------------------+   +---------------------------------------+
+|  LcpEchoHandler       |   |             Exploit Class             |
+|-----------------------|   |---------------------------------------|       # Explanation 4
+| __init__              |   | __init__(self, offs, iface, stage1,   |
+| handler               |   |          stage2, stage3, stage4)      |
+|                       |   | kdlsym(self, ksym)                    |
++-----------------------+   | lcp_negotiation(self)                 |
+                            | ipcp_negotiation(self)                |
+            |               | ppp_negotation(self)                  |
+            v               | build_fake_ifnet(self, fake_ifnet_ptr)|
+    Uses AsyncSniffer       | build_overflow_lle(self)              |
+                            | build_fake_lle(self, lleak)           |
+                            | build_first_rop(self, overflow_ifnet, |
+                            |                 lleak)                |
+                            | build_second_rop(self, kernel_leak,   |
+                            |                  lleak)               |
+            |               | execute(self)                         |
+            v               | send_padi(self)                       |
+                            | send_padr(self, source)               |        # Explanation 5
+                            | send_lcp(self, lcp_pkt)               |
+                            | send_ipcp(self, ipcp_pkt)             |
+                            | recv_lcp(self)                        |
+                            | recv_ipcp(self)                       |
+                            | ppp_auth(self)                        |
+                            | do_exploit(self)                      |
+                            +---------------------------------------+
+
+            |                   |                     |
+            v                   v                     v
 +----------------------------------------------------------+
 |                        Relationships                     |
 |----------------------------------------------------------|
