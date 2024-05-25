@@ -119,38 +119,44 @@
 
 ## Explanation STAGES :
 
-# Explanation1:
+# Explanation 1:
 
 This section imports the necessary libraries and defines the environment for the script.
 
-# Explanation2:
+# Explanation 2:
 
 This section defines constants related to PPPoE and FreeBSD that are used throughout the exploit.
 
-# Explanation3: 
+# Explanation 3: 
 
 These functions assist with data manipulation and packing/unpacking of values for network communication and memory operations.
 
-# Explanation4: 
+# Explanation 4: 
 
 This class handles LCP echo requests and responses using an asynchronous sniffer from the scapy library.
 
-# Explanation5: 
+# Explanation 5: 
 
 This class manages the core exploit functionality, including network packet exchanges and memory exploitation processes.
 
-# Explanation6:
+# Explanation 6:
 
 This section illustrates the interconnections between different components and classes within the script.
 
-# Explanation7: 
+# Explanation 7: 
 
 This stage establishes initial PPPoE connections by exchanging discovery packets (PADI, PADO, PADR, PADS) to set up a valid PPP session.
 
-# Explanation8: 
+# Explanation 8: 
 
 This stage defeats Kernel Address Space Layout Randomization (KASLR) by using information leaks to discover kernel addresses, which are essential for building return-oriented programming (ROP) chains.
 
-# Explanation10: 
+# Explanation 9:
+
+This stage constructs the initial ROP chain, leveraging memory leaks to manipulate kernel structures and set up the exploit environment.
+
+# Explanation 10: 
 
 The final stage executes the second ROP chain to perform the intended malicious actions, thereby completing the exploit.
+
+## //thanks to all developers on the sence//
