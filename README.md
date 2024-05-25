@@ -7,8 +7,8 @@
 | #!/usr/bin/env python3                |
 | # Copyright and License               |
 +---------------------------------------+
-|          Import Libraries             |
-|---------------------------------------|
+|          Import Libraries             |    ## Explantation 1
+|---------------------------------------|    
 | from argparse import ArgumentParser   |
 | from scapy.all import *               |
 | from scapy.layers.ppp import *        |
@@ -22,7 +22,7 @@
 +---------------------------------------+
 |               Constants               |
 |---------------------------------------|
-|          PPPoE Constants              |
+|          PPPoE Constants              |    ## Explanation 2
 |---------------------------------------|
 | PPPOE_TAG_HUNIQUE, PPPOE_TAG_ACOOKIE, |
 | PPPOE_CODE_PADI, ...                  |
@@ -39,13 +39,13 @@
         v
 +---------------------------------------+
 |            Helper Functions           |
-|---------------------------------------|
+|---------------------------------------|     # Explanation 3
 | p8, p16, p16be, p32, p32be, p64, p64be|
 +---------------------------------------+
         |
         v
 +--------------------+        +--------------------+
-| LcpEchoHandler     |        |      Exploit       |
+| LcpEchoHandler     |        |      Exploit       |     # Explanation 3
 |--------------------|        |--------------------|
 | __init__           |        | __init__           |
 | handler            |        | kdlsym             |
@@ -60,7 +60,7 @@
                               | execute            |
                               | send_padi          |
                               | send_padr          |
-                              | send_lcp           |
+                              | send_lcp           |      # Explanation 4
                               | send_ipcp          |
                               | recv_lcp           |
                               | recv_ipcp          |
@@ -72,7 +72,7 @@
 +----------------------------------------------------------+
 |                        Relationships                     |
 |----------------------------------------------------------|
-| Exploit <-----------------------------------> Constants  |
+| Exploit <-----------------------------------> Constants  |       # Explanation 5
 | Exploit <-----------------------------------> Functions  |
 | LcpEchoHandler <----------------------------> scapy      |
 | Exploit <-----------------------------------> offsets    |
@@ -82,7 +82,7 @@
 +---------------------------------------+
 |       Stage 1: Initial Setup          |
 |---------------------------------------|
-| Send and receive PADI and PADO packets|
+| Send and receive PADI and PADO packets|     # Explanation 6
 | Send and receive PADR and PADS packets|
 | Setup PPP connections                 |
 +---------------------------------------+
@@ -91,7 +91,7 @@
 +---------------------------------------+
 |        Stage 2: Defeat KASLR          |
 |---------------------------------------|
-| Defeat KASLR using leak techniques    |
+| Defeat KASLR using leak techniques    |     # Explanation 7
 | Use leaked address information        |
 | to build ROP chains                   |
 +---------------------------------------+
@@ -101,7 +101,7 @@
 |        Stage 3: Build First ROP       |
 |---------------------------------------|
 | Build first ROP chain                 |
-| Build Second Rop chain                |
+| Build Second Rop chain                |      # Explanation 8
 | Exploit memory leaks                  |
 | Create fake data structures           |
 +---------------------------------------+
@@ -110,7 +110,7 @@
 +---------------------------------------+
 |        Stage 4: Final Exploitation    |
 |---------------------------------------|
-| Execute second ROP chain              |
+| Execute second ROP chain              |      # Explanation 9
 | Run malicious instructions            |
 | Complete the exploit                  |
 +---------------------------------------+
